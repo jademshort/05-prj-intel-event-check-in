@@ -23,10 +23,29 @@ document.getElementById("waterCount").textContent = teamCounts.water;
 document.getElementById("zeroCount").textContent = teamCounts.zero;
 document.getElementById("powerCount").textContent = teamCounts.power;
 
+
 // Set progress bar on page load
 const percentage = Math.round((count / maxCount) * 100);
 progressBar.style.width = percentage + "%";
 progressBar.textContent = "";
+
+// --- Attendee List Logic ---
+// Load attendee list from localStorage or start empty
+let attendeeListArr = JSON.parse(localStorage.getItem("attendeeList")) || [];
+
+// Render attendee list on page
+function renderAttendeeList() {
+  const attendeeList = document.getElementById("attendeeList");
+  if (!attendeeList) return;
+  attendeeList.innerHTML = "";
+  attendeeListArr.forEach(function(entry) {
+    const li = document.createElement("li");
+    li.textContent = `${entry.name} (${entry.teamName})`;
+    attendeeList.appendChild(li);
+  });
+}
+// Render on page load
+renderAttendeeList();
 
 form.addEventListener("submit", function(event) {
   event.preventDefault();
@@ -61,6 +80,11 @@ form.addEventListener("submit", function(event) {
   const teamCounter = document.getElementById(team + "Count");
   teamCounter.textContent = teamCounts[team];
   localStorage.setItem(team + "Count", teamCounts[team]);
+
+  // Add attendee to the list (newest at top)
+  attendeeListArr.unshift({ name: name, teamName: teamName });
+  localStorage.setItem("attendeeList", JSON.stringify(attendeeListArr));
+  renderAttendeeList();
 
   form.reset();
 });

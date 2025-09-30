@@ -1,3 +1,32 @@
+/* Attendee List Section */
+#attendeeListSection {
+  margin: 40px auto 0 auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+#attendeeListHeader {
+  color: #0071c5;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+#attendeeList {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  color: #0071c5;
+  font-size: 1em;
+  text-align: center;
+}
+
+#attendeeList li {
+  margin-bottom: 6px;
+  font-weight: 400;
+  font-family: inherit;
+}
 
 /* Modern reset */
 * {
